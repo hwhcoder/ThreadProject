@@ -40,6 +40,6 @@ public class TestCountDownLatch {
         end.await(); //阻塞，等待end.countDown()全部执行完
         System.out.println("Game Over");
 
-        exec.shutdown();//关闭线程池
+        exec.shutdown();
     }
 }

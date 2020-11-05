@@ -44,13 +44,13 @@ public class MySemaphore extends Thread {
             executorService.submit(new MySemaphore(i + 1, position));
         }
 
+        //TODO
+        //可以测试一下acquireUninterruptibly
 
-        executorService.shutdown();
+        //如果不shutdown，则线程阻塞
+        executorService.shutdown();//停止接收新任务，原来的任务继续执行
 
-        position.acquireUninterruptibly(2);
-        //有点问题
-        System.out.println("使用完毕，需要清扫了");
-        System.out.println("剩余队列大小:" + position.getQueueLength());
-        position.release(2);
+        System.out.println("hello");
+
     }
 }
