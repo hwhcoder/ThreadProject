@@ -5,7 +5,11 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.LinkedBlockingQueue;
 
+/**
+ * 阻塞队列
+ */
 public class MyBlockingQueue extends Thread {
+
     public static BlockingQueue<String> queue = new LinkedBlockingQueue<String>(3);
     private int index;
 
@@ -16,23 +20,25 @@ public class MyBlockingQueue extends Thread {
     public void run() {
         try {
             queue.put(String.valueOf(this.index));
-            System.out.println("{" + this.index + "} in queue!");
+            System.out.println("{" + this.index + "} enter queue!");
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     public static void main(String args[]) {
+
         ExecutorService service = Executors.newCachedThreadPool();
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 100; i++) {
             service.submit(new MyBlockingQueue(i));
         }
+
         Thread thread = new Thread() {
             public void run() {
                 try {
                     while (true) {
                         Thread.sleep((int) (Math.random() * 1000));
-                        System.out.println("=======" + MyBlockingQueue.queue.size());
+                        System.out.println("queue size：   " + MyBlockingQueue.queue.size());
                         if (MyBlockingQueue.queue.isEmpty())
                             break;
                         String str = MyBlockingQueue.queue.take();
@@ -43,6 +49,7 @@ public class MyBlockingQueue extends Thread {
                 }
             }
         };
+
         service.submit(thread);
         service.shutdown();
     }

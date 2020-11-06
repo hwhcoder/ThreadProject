@@ -35,6 +35,7 @@ public class TestCyclicBarrier {
             this.barrier = barrier;
         }
 
+        @Override
         public void run() {
             try {
                 Thread.sleep(times[0] * 1000);
