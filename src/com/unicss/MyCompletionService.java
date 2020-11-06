@@ -24,6 +24,7 @@ public class MyCompletionService implements Callable<String> {
         for (int i = 0; i < 10; i++) {
             System.out.println(completion.take().get());
         }
+
         service.shutdown();
     }
 

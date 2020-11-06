@@ -22,7 +22,7 @@ public class MyExecutorTest extends Thread {
                 //如果发生了异常，导致countDown未执行，则主线程将会一直阻塞
                 //一般来说，最好将countDown放在finally块中
                 //可以测试一下，new CountDownLatch(1)，然后countDown移出while块中，看下耗时差多少
-                //CountDownLatch是线程安全的吧？
+                //CountDownLatch是线程安全的
                 countDownLatch.countDown();
             }
 
